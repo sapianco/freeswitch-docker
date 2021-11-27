@@ -2,7 +2,7 @@ version: '2.2'
 
 services:
   freeswitch:
-    image: "mmtnrw/freeswitch"
+    image: "sapian/freeswitch"
     logging:
         driver: "json-file"
         options:
@@ -10,13 +10,14 @@ services:
             max-size: "10m"
     restart: always
     network_mode: host
-    privileged: true
     tty: true
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
       - "/etc/timezone:/etc/timezone:ro"
-      - "/share/Freeswitch/config:/config"
-      - "/share/Freeswitch/data:/data"
-      - "/share/Freeswitch/sounds:/sounds"
+      - "fs-volume:/config"
+      - "fs-volume:/data"
+      - "fs-volume:/sounds"
     environment:
-      TZ: "Europe/Amsterdam"
+      TZ: "America/Bogota"
+volumes:
+  fs-volume:
